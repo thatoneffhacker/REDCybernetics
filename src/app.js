@@ -3,165 +3,8 @@
  * Pure JavaScript (Zero JSX) - 100% compatible with GitHub Pages, static hosts, and Vite.
  */
 
-// Embedded default games registry (works offline and under file:// or http://)
-const DEFAULT_GAMES = [
-  {
-    "id": "2048",
-    "title": "2048 // SYNAPSE",
-    "category": "Puzzle",
-    "description": "Slide matching cyber-tiles to synthesize the legendary 2048 memory core.",
-    "iframeUrl": "https://gabrielecirulli.github.io/2048/",
-    "thumbnail": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80",
-    "instructions": "Use Arrow Keys [↑ ↓ ← →] or Swipe to merge identical numeric power blocks.",
-    "tags": ["Puzzle", "Logic", "Addictive"],
-    "featured": true,
-    "rating": 4.9,
-    "plays": 14200
-  },
-  {
-    "id": "hextris",
-    "title": "HEXTRIS // OVERDRIVE",
-    "category": "Arcade",
-    "description": "Fast-paced hexagonal puzzle reflex test. Rotate the hexagon to match incoming light bars.",
-    "iframeUrl": "https://hextris.io/",
-    "thumbnail": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&auto=format&fit=crop&q=80",
-    "instructions": "Use Left & Right Arrow keys [← →] or A / D to rotate the hexagon base.",
-    "tags": ["Arcade", "Reflex", "Rhythm"],
-    "featured": true,
-    "rating": 4.8,
-    "plays": 18900
-  },
-  {
-    "id": "snake-matrix",
-    "title": "CYBER SNAKE // PROTOCOL",
-    "category": "Retro",
-    "description": "Guide the cyber-viper through the grid to devour rogue data nodes without colliding.",
-    "iframeUrl": "https://tbotr.github.io/Snake/",
-    "thumbnail": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&auto=format&fit=crop&q=80",
-    "instructions": "Arrow keys [↑ ↓ ← →] or WASD to navigate. Avoid wall impacts and self-collision.",
-    "tags": ["Retro", "Classic", "Survival"],
-    "featured": true,
-    "rating": 4.7,
-    "plays": 22100
-  },
-  {
-    "id": "chrome-dino",
-    "title": "NEO-RUNNER // T-REX",
-    "category": "Speed",
-    "description": "High-velocity desert traversal. Leap over barbed cyber-cacti and flying surveillance drones.",
-    "iframeUrl": "https://chromedino.com/",
-    "thumbnail": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=600&auto=format&fit=crop&q=80",
-    "instructions": "Spacebar or [↑] to jump. Down Arrow [↓] to duck beneath low aerial threats.",
-    "tags": ["Speed", "Endless", "Arcade"],
-    "featured": true,
-    "rating": 4.9,
-    "plays": 31500
-  },
-  {
-    "id": "pacman",
-    "title": "PAC-GRID // VECTOR",
-    "category": "Retro",
-    "description": "Navigate labyrinthine cyber ducts, harvesting energy pellet nodes while dodging hunter AI spirits.",
-    "iframeUrl": "https://pacman.platzh1rsch.ch/",
-    "thumbnail": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&auto=format&fit=crop&q=80",
-    "instructions": "Use Arrow keys to steer through the neon maze. Eat large power nodes to counter-attack.",
-    "tags": ["Retro", "Arcade", "Maze"],
-    "featured": false,
-    "rating": 4.8,
-    "plays": 16400
-  },
-  {
-    "id": "space-invaders",
-    "title": "ORBITAL DEFENSE // 1978",
-    "category": "Action",
-    "description": "Repel descending waves of extraterrestrial synthetic armadas before they breach planetary shields.",
-    "iframeUrl": "https://funhtml5games.com/spaceinvaders/index.html",
-    "thumbnail": "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=600&auto=format&fit=crop&q=80",
-    "instructions": "Left/Right Arrow keys to maneuver defense cannon. Spacebar to discharge plasma bolts.",
-    "tags": ["Action", "Shooter", "Retro"],
-    "featured": false,
-    "rating": 4.6,
-    "plays": 9800
-  },
-  {
-    "id": "tetris-matrix",
-    "title": "TETRA-GRID // BLOCK FALL",
-    "category": "Puzzle",
-    "description": "Tactical geometric block assembly. Clear scanning rows in rapid succession under increasing pressure.",
-    "iframeUrl": "https://chvin.github.io/react-tetris/",
-    "thumbnail": "https://images.unsplash.com/photo-1563089145-599997674d42?w=600&auto=format&fit=crop&q=80",
-    "instructions": "Left/Right [← →] move. Up [↑] rotate tetromino. Down [↓] soft drop. Space for hard drop.",
-    "tags": ["Puzzle", "Classic", "Retro"],
-    "featured": true,
-    "rating": 4.9,
-    "plays": 28400
-  },
-  {
-    "id": "asteroids",
-    "title": "VOID DRIFTER // ASTEROIDS",
-    "category": "Action",
-    "description": "Vector spacecraft inertial combat in deep outer cyber-space. Blast dense mineral fields.",
-    "iframeUrl": "https://dougmcinnes.com/html-5-asteroids/",
-    "thumbnail": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&auto=format&fit=crop&q=80",
-    "instructions": "Left/Right to rotate ship. Up to apply thruster inertia. Spacebar to fire photon blasters.",
-    "tags": ["Action", "Physics", "Vector"],
-    "featured": false,
-    "rating": 4.5,
-    "plays": 8300
-  },
-  {
-    "id": "pong-redline",
-    "title": "REDLINE PONG // LASER DUEL",
-    "category": "Retro",
-    "description": "High-velocity tactical paddle interception duel against ruthless CPU trajectory prediction.",
-    "iframeUrl": "https://pong-2.com/",
-    "thumbnail": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&auto=format&fit=crop&q=80",
-    "instructions": "Mouse or W/S / Up/Down arrows to control paddle elevation.",
-    "tags": ["Retro", "2-Player", "Arcade"],
-    "featured": false,
-    "rating": 4.4,
-    "plays": 7100
-  },
-  {
-    "id": "flappy-subroutine",
-    "title": "FLAPPY DRONE // SUBROUTINE",
-    "category": "Arcade",
-    "description": "Precision thrust modulation through narrow laser gates and jagged industrial piping.",
-    "iframeUrl": "https://flappybird.io/",
-    "thumbnail": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600&auto=format&fit=crop&q=80",
-    "instructions": "Click mouse or tap Spacebar to actuate vertical lift jets.",
-    "tags": ["Arcade", "Skill", "Hardcore"],
-    "featured": false,
-    "rating": 4.6,
-    "plays": 19500
-  },
-  {
-    "id": "breakout-neon",
-    "title": "BREAKOUT // CORE CRACKER",
-    "category": "Arcade",
-    "description": "Shatter fortified firewalls brick by brick with a hyper-bouncing kinetic orb.",
-    "iframeUrl": "https://scratch.mit.edu/projects/embed/10128407/?autostart=true",
-    "thumbnail": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=80",
-    "instructions": "Move mouse or Left/Right arrows to deflect the ball into vulnerable data bricks.",
-    "tags": ["Arcade", "Breakout", "Action"],
-    "featured": false,
-    "rating": 4.5,
-    "plays": 6500
-  },
-  {
-    "id": "speed-runner",
-    "title": "HEX GLIDER // TUNNEL RUN",
-    "category": "Speed",
-    "description": "High-speed supersonic wireframe tunnel navigation at extreme Mach velocities.",
-    "iframeUrl": "https://www.google.com/logos/2012/slalom12.html",
-    "thumbnail": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&auto=format&fit=crop&q=80",
-    "instructions": "Arrow keys Left / Right to weave through navigation gates.",
-    "tags": ["Speed", "3D", "Reflex"],
-    "featured": false,
-    "rating": 4.7,
-    "plays": 11200
-  }
-];
+// Embedded default games registry (cleared as requested)
+const DEFAULT_GAMES = [];
 
 // Audio Synthesizer (Zero asset loading)
 class CyberAudio {
@@ -281,30 +124,31 @@ const state = {
 // Initialize Games
 function initApp() {
   try {
-    const stored = localStorage.getItem('redline_games_library_v1');
+    // Purge old cached v1 games library so all games are removed
+    localStorage.removeItem('redline_games_library_v1');
+    localStorage.removeItem('redline_favorites_v1');
+    localStorage.removeItem('redline_recently_played_v1');
+
+    const stored = localStorage.getItem('redline_games_library_v2');
     if (stored) {
       const parsed = JSON.parse(stored);
-      if (Array.isArray(parsed) && parsed.length > 0) {
-        state.games = parsed;
-      } else {
-        state.games = DEFAULT_GAMES;
-      }
+      state.games = Array.isArray(parsed) ? parsed : [];
     } else {
-      state.games = DEFAULT_GAMES;
+      state.games = [];
     }
   } catch {
-    state.games = DEFAULT_GAMES;
+    state.games = [];
   }
 
   try {
-    const favs = localStorage.getItem('redline_favorites_v1');
-    state.favorites = favs ? JSON.parse(favs) : ['2048', 'tetris-matrix'];
+    const favs = localStorage.getItem('redline_favorites_v2');
+    state.favorites = favs ? JSON.parse(favs) : [];
   } catch {
-    state.favorites = ['2048', 'tetris-matrix'];
+    state.favorites = [];
   }
 
   try {
-    const recents = localStorage.getItem('redline_recently_played_v1');
+    const recents = localStorage.getItem('redline_recently_played_v2');
     state.recent = recents ? JSON.parse(recents) : [];
   } catch {
     state.recent = [];
@@ -348,15 +192,15 @@ function initApp() {
 }
 
 function saveGames() {
-  localStorage.setItem('redline_games_library_v1', JSON.stringify(state.games));
+  localStorage.setItem('redline_games_library_v2', JSON.stringify(state.games));
 }
 
 function saveFavorites() {
-  localStorage.setItem('redline_favorites_v1', JSON.stringify(state.favorites));
+  localStorage.setItem('redline_favorites_v2', JSON.stringify(state.favorites));
 }
 
 function saveRecent() {
-  localStorage.setItem('redline_recently_played_v1', JSON.stringify(state.recent));
+  localStorage.setItem('redline_recently_played_v2', JSON.stringify(state.recent));
 }
 
 function toggleFavorite(id, e) {
@@ -686,11 +530,18 @@ function render() {
               <div class="w-12 h-12 mx-auto bg-red-950/40 border border-red-800/40 text-red-500 flex items-center justify-center mb-4">
                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
-              <h3 class="font-display font-bold text-lg text-white mb-1">NO PROTOCOLS FOUND IN SECTOR</h3>
-              <p class="text-xs font-mono-code text-zinc-400 max-w-md mx-auto mb-6">No iframe game matched your criteria. You can inject a custom title into the JSON library or reset search filters.</p>
+              <h3 class="font-display font-bold text-lg text-white mb-1">REGISTRY EMPTY // ALL GAMES REMOVED</h3>
+              <p class="text-xs font-mono-code text-zinc-400 max-w-md mx-auto mb-6">
+                All pre-installed game protocols have been removed. You can inject custom iframe games or load a games.json file.
+              </p>
               <div class="flex items-center justify-center gap-3">
-                <button onclick="window.resetFilters()" class="px-4 py-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs font-mono-code text-zinc-200 transition-colors cursor-pointer">Reset Filters</button>
-                <button onclick="window.openAddModal()" class="px-5 py-2 bg-red-600 hover:bg-red-500 text-white text-xs font-mono-code font-bold uppercase tracking-wider cyber-cut transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(255,0,60,0.5)] cursor-pointer">Add Custom Title</button>
+                <button onclick="window.openAddModal()" class="px-5 py-2 bg-red-600 hover:bg-red-500 text-white text-xs font-mono-code font-bold uppercase tracking-wider cyber-cut transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(255,0,60,0.5)] cursor-pointer">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  Add Custom Game
+                </button>
+                <button onclick="window.openJsonModal()" class="px-4 py-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs font-mono-code text-zinc-200 transition-colors cursor-pointer">
+                  Open GAMES.JSON Editor
+                </button>
               </div>
             </div>
           `}
@@ -1427,10 +1278,14 @@ window.commitJsonText = function () {
 };
 
 window.resetDefaults = function () {
-  if (confirm('Reset to factory default games.json?')) {
+  if (confirm('Clear games library?')) {
     cyberAudio.playClick();
-    state.games = DEFAULT_GAMES;
-    localStorage.removeItem('redline_games_library_v1');
+    state.games = [];
+    localStorage.removeItem('redline_games_library_v2');
+    localStorage.removeItem('redline_favorites_v2');
+    localStorage.removeItem('redline_recently_played_v2');
+    state.favorites = [];
+    state.recent = [];
     closeJsonModal();
     render();
   }
