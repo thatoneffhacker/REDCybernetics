@@ -3,8 +3,37 @@
  * Pure JavaScript (Zero JSX) - 100% compatible with GitHub Pages, static hosts, and Vite.
  */
 
-// Embedded default games registry (cleared as requested)
-const DEFAULT_GAMES = [];
+// Embedded default games registry
+const DEFAULT_GAMES = [
+  {
+    "id": "madness-accelerant",
+    "title": "MADNESS: Accelerant",
+    "category": "Action",
+    "description": "Fast-paced action combat game to beat the enemies and escape the beast monster. Playable remake of Krinkels' Madness Consternation by Tom Fulp.",
+    "iframeUrl": "https://games.crazygames.com/en_US/madness-accelerant/index.html?isNewUser=false&__nextLocale=en-US&isFirstSession=true&czyExpClientGoogleH5_2=rewarded&czyExpClientOptable4=enabled&czyExpClientAdsDummyAA=enabled&czyExpClientAdsDummyAA20=disabled&czyExpClientAdsDummyAA50=enabled&czyExpClientGamera=enabled&czyExpClientAdsConsentGate2=disabled&czyExpClientLiveIntent=enabled&czyExpClientAmazonBidRoute=prebid&czyExpClientVideoNoFillFloor_CZY_18944=lowered_floor&czyExpClientContentSignals=enabled&czyExpClientAdsHolidayMode_CZY_21360=disabled&czyExpClientAdmiral=enabled&czyExpClientAdXFloor_1_CZY_20844=1&czyExpDisableInterstitialsFirst12h_CZY_18471=disabled&czyExpClientUniformLoading_CZY_19437=enabled&czyExpClientFullscreenMobileRendering_CZY_20866=enabled&czyExpClientArtworkAbTesting_CZY_20701=enabled&czyExpModelApiTraffic_CZY_21907=enabled&czyExpClientDomainProbe_CZY_21425=disabled&czyExpClientInAppPurchaseAlternativeBillingAndroidValidToken=disabled&czyExpClientModelGamePage=knn_v3&czyExpClientGameGpuGuardAndroid=disabled&czyExpClientInAppPurchaseAlternativeBillingAndroid=enabled&czyExpClientInAppPurchaseAlternativeBillingIOSUS=enabled&v=2.13",
+    "thumbnail": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=80",
+    "instructions": "A / D or Arrow keys to move, W / Up to jump, S / Down to duck. Mouse Left Click or A/S to aim and shoot. Q / E to switch weapons.",
+    "tags": ["Action", "2D", "Shooter", "Madness", "Combat"],
+    "featured": true,
+    "rating": 4.9,
+    "plays": 24800
+  }
+];
+
+// Cyberpunk Game Categories / Sections
+const CATEGORIES = [
+  { id: 'ALL', label: 'All Protocols' },
+  { id: 'Action', label: 'Action' },
+  { id: 'Puzzle', label: 'Puzzle' },
+  { id: 'Sandbox', label: 'Sandbox' },
+  { id: 'Rythem', label: 'Rythem' },
+  { id: '1st Person', label: '1st Person' },
+  { id: '2D', label: '2D' },
+  { id: '3D', label: '3D' },
+  { id: '3rd person', label: '3rd person' },
+  { id: 'Shooter', label: 'Shooter' },
+  { id: 'FAVORITES', label: 'Favorites' }
+];
 
 // Audio Synthesizer (Zero asset loading)
 class CyberAudio {
@@ -124,20 +153,18 @@ const state = {
 // Initialize Games
 function initApp() {
   try {
-    // Purge old cached v1 games library so all games are removed
     localStorage.removeItem('redline_games_library_v1');
-    localStorage.removeItem('redline_favorites_v1');
-    localStorage.removeItem('redline_recently_played_v1');
+    localStorage.removeItem('redline_games_library_v2');
 
-    const stored = localStorage.getItem('redline_games_library_v2');
+    const stored = localStorage.getItem('redline_games_library_v3');
     if (stored) {
       const parsed = JSON.parse(stored);
-      state.games = Array.isArray(parsed) ? parsed : [];
+      state.games = Array.isArray(parsed) && parsed.length > 0 ? parsed : DEFAULT_GAMES;
     } else {
-      state.games = [];
+      state.games = DEFAULT_GAMES;
     }
   } catch {
-    state.games = [];
+    state.games = DEFAULT_GAMES;
   }
 
   try {
@@ -192,7 +219,7 @@ function initApp() {
 }
 
 function saveGames() {
-  localStorage.setItem('redline_games_library_v2', JSON.stringify(state.games));
+  localStorage.setItem('redline_games_library_v3', JSON.stringify(state.games));
 }
 
 function saveFavorites() {
@@ -294,18 +321,27 @@ function getFilteredGames() {
   return state.games.filter((game) => {
     if (state.activeCategory === 'FAVORITES') {
       if (!state.favorites.includes(game.id)) return false;
-    } else if (state.activeCategory === 'ACTION') {
-      if (game.category !== 'Action') return false;
-    } else if (state.activeCategory === 'ARCADE') {
-      if (game.category !== 'Arcade') return false;
-    } else if (state.activeCategory === 'PUZZLE') {
-      if (game.category !== 'Puzzle') return false;
-    } else if (state.activeCategory === 'RETRO') {
-      if (game.category !== 'Retro') return false;
-    } else if (state.activeCategory === 'SPEED') {
-      if (game.category !== 'Speed') return false;
-    } else if (state.activeCategory === 'CUSTOM') {
-      if (!game.isCustom) return false;
+    } else if (state.activeCategory !== 'ALL') {
+      const target = state.activeCategory.toLowerCase();
+      const cat = (game.category || '').toLowerCase();
+      const tags = (game.tags || []).map((t) => t.toLowerCase());
+
+      let matches = false;
+      if (target === 'rythem') {
+        matches = cat.includes('ryth') || cat.includes('rhyth') || tags.some((t) => t.includes('ryth') || t.includes('rhyth'));
+      } else if (target === '1st person') {
+        matches = cat.includes('1st') || cat.includes('first') || tags.some((t) => t.includes('1st') || t.includes('first') || t === 'fps');
+      } else if (target === '3rd person') {
+        matches = cat.includes('3rd') || cat.includes('third') || tags.some((t) => t.includes('3rd') || t.includes('third') || t === 'tps');
+      } else if (target === '2d') {
+        matches = cat === '2d' || tags.includes('2d');
+      } else if (target === '3d') {
+        matches = cat === '3d' || tags.includes('3d');
+      } else {
+        matches = cat === target || tags.includes(target) || cat.includes(target);
+      }
+
+      if (!matches) return false;
     }
 
     if (state.searchQuery.trim()) {
@@ -441,17 +477,17 @@ function render() {
             </div>
 
             <div class="flex items-center gap-1.5 overflow-x-auto pb-1 max-w-full">
-              ${['ALL', 'ACTION', 'ARCADE', 'PUZZLE', 'RETRO', 'SPEED', 'FAVORITES'].map((cat) => `
+              ${CATEGORIES.map((cat) => `
                 <button
-                  onclick="window.setCategory('${cat}')"
+                  onclick="window.setCategory('${cat.id}')"
                   class="px-3 py-1.5 font-mono-code text-xs font-semibold whitespace-nowrap transition-all border cursor-pointer ${
-                    state.activeCategory === cat
+                    state.activeCategory === cat.id
                       ? 'bg-red-600 text-white border-red-500 shadow-[0_0_12px_rgba(255,0,60,0.5)]'
                       : 'bg-black/50 text-zinc-400 border-zinc-800 hover:text-white hover:border-red-900/60'
                   }"
                 >
-                  ${cat === 'ALL' ? 'All Protocols' : cat === 'RETRO' ? 'Retro 8-Bit' : cat === 'SPEED' ? 'Speed & Reflex' : cat}
-                  ${cat === 'FAVORITES' && state.favorites.length > 0 ? `(${state.favorites.length})` : ''}
+                  ${cat.label}
+                  ${cat.id === 'FAVORITES' && state.favorites.length > 0 ? `(${state.favorites.length})` : ''}
                 </button>
               `).join('')}
             </div>
@@ -846,12 +882,15 @@ function renderAddModal() {
             <div>
               <label class="block text-zinc-300 font-bold mb-1.5">CATEGORY</label>
               <select id="addCat" class="w-full px-3 py-2.5 bg-[#050508] border border-zinc-800 text-white focus:outline-hidden focus:border-red-500 transition-colors cursor-pointer">
-                <option value="Action">Action</option>
-                <option value="Arcade">Arcade</option>
+                <option value="Action" selected>Action</option>
                 <option value="Puzzle">Puzzle</option>
-                <option value="Retro">Retro</option>
-                <option value="Speed">Speed</option>
-                <option value="Custom" selected>Custom</option>
+                <option value="Sandbox">Sandbox</option>
+                <option value="Rythem">Rythem</option>
+                <option value="1st Person">1st Person</option>
+                <option value="2D">2D</option>
+                <option value="3D">3D</option>
+                <option value="3rd person">3rd person</option>
+                <option value="Shooter">Shooter</option>
               </select>
             </div>
             <div>
@@ -1278,14 +1317,10 @@ window.commitJsonText = function () {
 };
 
 window.resetDefaults = function () {
-  if (confirm('Clear games library?')) {
+  if (confirm('Reset to factory default games library?')) {
     cyberAudio.playClick();
-    state.games = [];
-    localStorage.removeItem('redline_games_library_v2');
-    localStorage.removeItem('redline_favorites_v2');
-    localStorage.removeItem('redline_recently_played_v2');
-    state.favorites = [];
-    state.recent = [];
+    state.games = DEFAULT_GAMES;
+    localStorage.removeItem('redline_games_library_v3');
     closeJsonModal();
     render();
   }

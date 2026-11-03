@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "id": "madness-accelerant",
+    "title": "MADNESS: Accelerant",
+    "category": "Action",
+    "description": "Fast-paced action combat game to beat the enemies and escape the beast monster. Playable remake of Krinkels' Madness Consternation by Tom Fulp.",
+    "iframeUrl": "https://games.crazygames.com/en_US/madness-accelerant/index.html?isNewUser=false&__nextLocale=en-US&isFirstSession=true&czyExpClientGoogleH5_2=rewarded&czyExpClientOptable4=enabled&czyExpClientAdsDummyAA=enabled&czyExpClientAdsDummyAA20=disabled&czyExpClientAdsDummyAA50=enabled&czyExpClientGamera=enabled&czyExpClientAdsConsentGate2=disabled&czyExpClientLiveIntent=enabled&czyExpClientAmazonBidRoute=prebid&czyExpClientVideoNoFillFloor_CZY_18944=lowered_floor&czyExpClientContentSignals=enabled&czyExpClientAdsHolidayMode_CZY_21360=disabled&czyExpClientAdmiral=enabled&czyExpClientAdXFloor_1_CZY_20844=1&czyExpDisableInterstitialsFirst12h_CZY_18471=disabled&czyExpClientUniformLoading_CZY_19437=enabled&czyExpClientFullscreenMobileRendering_CZY_20866=enabled&czyExpClientArtworkAbTesting_CZY_20701=enabled&czyExpModelApiTraffic_CZY_21907=enabled&czyExpClientDomainProbe_CZY_21425=disabled&czyExpClientInAppPurchaseAlternativeBillingAndroidValidToken=disabled&czyExpClientModelGamePage=knn_v3&czyExpClientGameGpuGuardAndroid=disabled&czyExpClientInAppPurchaseAlternativeBillingAndroid=enabled&czyExpClientInAppPurchaseAlternativeBillingIOSUS=enabled&v=2.13",
+    "thumbnail": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=80",
+    "instructions": "A / D or Arrow keys to move, W / Up to jump, S / Down to duck. Mouse Left Click or A/S to aim and shoot. Q / E to switch weapons.",
+    "tags": ["Action", "2D", "Shooter", "Madness", "Combat"],
+    "featured": true,
+    "rating": 4.9,
+    "plays": 24800
+  }
+]
