@@ -14,17 +14,30 @@
   },
   {
     "id": "mineacraft-1-8",
-    "title": "Mineacraft 1.8",
+    "title": "Minecraft 1.8",
     "category": "Sandbox",
-    "description": "Classic Minecraft 1.8 sandbox voxel exploration and survival on Eaglercraft. Mine raw materials, craft gear, build mega-structures, and explore endless worlds.",
-    "iframeUrl": "https://eaglercraft.ru",
-    "openInBlankTab": true,
-    "embedCode": "<iframe src=\"https://eaglercraft.ru\" frameborder=\"0\" scrolling=\"no\" width=\"100%\" height=\"100%\" loading=\"lazy\"></iframe>\n<style type=\"text/css\">iframe { position: absolute; width: 100%; height: 100%; z-index: 999; }</style>\n<style>\nbody { background: black;\ncolor: white}\n</style>",
-    "thumbnail": "https://images.unsplash.com/photo-1627856013091-fed6e4e30025?w=600&auto=format&fit=crop&q=80",
+    "description": "Direct launcher for Minecraft 1.8 (Eaglercraft) via local media archive link. No iframe wrapper.",
+    "url": "file:///media/archive/eaglercraft1-8-62da5f39.zip/eaglercraft1-8.html",
+    "directLink": "file:///media/archive/eaglercraft1-8-62da5f39.zip/eaglercraft1-8.html",
+    "thumbnail": "/assets/aistudio/Minecraft-24_8a496b7b.jpg",
     "instructions": "WASD to walk, Space to jump, Left Click to mine/attack, Right Click to place blocks, E for inventory, ESC to pause/unlock cursor.",
     "tags": ["Sandbox", "3D", "1st Person", "Survival", "Crafting"],
     "featured": true,
     "rating": 5.0,
     "plays": 51200
+  },
+  {
+    "id": "godzilla-daikaiju-battle-royale",
+    "title": "Godzilla Daikaiju Battle Royal",
+    "category": "Action",
+    "description": "Epic 2D monster clash! Choose your legendary kaiju from the Godzilla universe and brawl across destructible cities with devastating atomic blasts.",
+    "iframeUrl": "https://www.gameflare.com/embed/godzilla-daikaiju-battle-royale/",
+    "embedCode": "<iframe src=\"https://www.gameflare.com/embed/godzilla-daikaiju-battle-royale/\" frameborder=\"0\" scrolling=\"no\" width=\"785\" height=\"535\" allowfullscreen></iframe>",
+    "thumbnail": "/assets/aistudio/godzilla_the_animated_movie_poster_by_leivbjerga_dfagf2n-fullview_f936c100.jpg",
+    "instructions": "Arrow Keys to move, A / S / D for attack combos, W for special kaiju moves, Space to jump & roar.",
+    "tags": ["Action", "2D", "Fighting", "Godzilla", "Kaiju", "Battle Royale"],
+    "featured": true,
+    "rating": 4.9,
+    "plays": 34200
   }
 ]

@@ -109,3 +109,126 @@ body {
     0 calc(100% - 8px)
   );
 }
+
+/* ============================================================
+   MADNESS COMBAT: PROJECT NEXUS CLASSIC MENU AESTHETICS
+   ============================================================ */
+.nexus-bg {
+  background-color: #0b0102;
+  background-image: 
+    radial-gradient(ellipse at 50% 25%, #220306 0%, #0d0102 70%, #050001 100%);
+}
+
+.nexus-grid {
+  background-image: 
+    linear-gradient(to right, rgba(160, 0, 0, 0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(160, 0, 0, 0.22) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* Distinctive Red Glowing Frame Bar from Classic Nexus Menu */
+.nexus-bar {
+  height: 4px;
+  background: #cc0000;
+  box-shadow: 0 0 14px rgba(220, 0, 0, 0.95), 0 0 28px rgba(220, 0, 0, 0.6);
+  border-top: 1px solid #ff4444;
+  border-bottom: 1px solid #660000;
+}
+
+.nexus-bar-thin {
+  height: 2px;
+  background: #bb0000;
+  box-shadow: 0 0 8px rgba(200, 0, 0, 0.8);
+}
+
+/* Classic Nexus Double-Bordered Button System */
+.nexus-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #150002;
+  border: 2px solid #a30000;
+  padding: 2px;
+  box-shadow: 0 0 8px rgba(180, 0, 0, 0.35);
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.nexus-btn-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #320004 0%, #170002 100%);
+  border: 1px solid #6b0000;
+  padding: 6px 14px;
+  color: #ffffff;
+  font-family: 'Orbitron', 'Chakra Petch', sans-serif;
+  font-weight: 800;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.15s ease-in-out;
+}
+
+.nexus-btn:hover {
+  border-color: #ff1e1e;
+  box-shadow: 0 0 16px rgba(255, 0, 0, 0.8), inset 0 0 10px rgba(255, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.nexus-btn:hover .nexus-btn-inner {
+  background: linear-gradient(180deg, #aa0000 0%, #5e0000 100%);
+  border-color: #ff4444;
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+}
+
+.nexus-btn.active {
+  border-color: #ff2222;
+  box-shadow: 0 0 18px rgba(255, 0, 0, 0.9);
+}
+
+.nexus-btn.active .nexus-btn-inner {
+  background: linear-gradient(180deg, #bb0000 0%, #770000 100%);
+  border-color: #ff6666;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.95);
+}
+
+/* Classic Nexus Blood-Text & Splatter */
+.nexus-blood-title {
+  font-family: 'Orbitron', Impact, sans-serif;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  text-shadow: 
+    0 2px 0 #990000,
+    0 4px 0 #660000,
+    0 6px 12px rgba(0, 0, 0, 0.9),
+    0 0 20px rgba(220, 0, 0, 0.7);
+}
+
+.nexus-x {
+  color: #ff0026;
+  text-shadow: 
+    0 0 10px rgba(255, 0, 40, 1),
+    0 0 25px rgba(255, 0, 40, 0.8),
+    0 3px 0 #880000;
+}
+
+/* Sound Visualizer Equalizer Bar Animations */
+@keyframes nexusEq {
+  0%, 100% { height: 4px; }
+  50% { height: 16px; }
+}
+
+.nexus-eq-1 { animation: nexusEq 0.7s infinite ease-in-out; }
+.nexus-eq-2 { animation: nexusEq 0.5s infinite ease-in-out 0.15s; }
+.nexus-eq-3 { animation: nexusEq 0.8s infinite ease-in-out 0.3s; }
+.nexus-eq-4 { animation: nexusEq 0.45s infinite ease-in-out 0.1s; }
+.nexus-eq-5 { animation: nexusEq 0.65s infinite ease-in-out 0.25s; }
+
